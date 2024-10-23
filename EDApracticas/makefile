@@ -4,7 +4,7 @@
 medirTyContarV: medirTyContarV.c ordenacion.o algoritmos.o
 	gcc -g medirTyContarV.c ordenacion.o algoritmos.o -o medirTyContarV
 
-busqueda.o busqueda.c busqueda.h
+busqueda.o: busqueda.c busqueda.h
 	gcc -c -g busqueda.c
 
 # Análisis experimental de algoritmos que NO necesitan un vector (ejercicio 2, 3, 4 y 6 )
