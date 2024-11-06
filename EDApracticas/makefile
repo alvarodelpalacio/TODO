@@ -36,6 +36,9 @@ lista.o: lista.c lista.h
 pruebaEj5: pruebaEj5.c lista.o 
 	gcc -g pruebaEj5.c lista.o -o pruebaEj5
 
+pruebaRadix: pruebaRadix.c lista.o radixSort.o
+	gcc -g pruebaRadix.c lista.o radixSort.o -o pruebaRadix -lm
+
 clean:
 	rm *.o
 
