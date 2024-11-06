@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <math.h>
+#include <stdlib.h>
 #include "lista.h"
 #include "radixSort.h"
 
@@ -8,16 +9,19 @@ void radixSort(nodo **lista, int numGrupos, int numCifras){
     nodo **grupos, **gruposFin, *aux;
     int i,j,cifra;
 
-    grupos = (nodo **)calloc(numGrupos * sizeof(nodo*));
+    grupos = (nodo **)calloc(numGrupos, sizeof(nodo*));
     gruposFin = (nodo **)malloc(numGrupos*sizeof(nodo*));
 
-    for(i=numCifras; i>1;i--){
+    for(i=numCifras; i>=1; i--){
         for(j=0;j<numGrupos;j++){
 
             grupos[j]= NULL;
             gruposFin[j]=NULL;
 
         }
+
+        distribuir(i,lista, grupos, gruposFin);
+        concatenar(lista, grupos, gruposFin, numGrupos);
     }
 
 }
@@ -28,6 +32,7 @@ void distribuir(int numCifra, nodo **lista, nodo **grupos, nodo **gruposFin){
     aux= *lista;
     char cadena[10];
     while(aux!=NULL){
+
         sprintf(cadena, "%05d", aux->info);
         cifra = cadena[numCifra-1] - 48;
         aux = aux->sig;
@@ -41,12 +46,13 @@ void distribuir(int numCifra, nodo **lista, nodo **grupos, nodo **gruposFin){
             gruposFin[cifra] = aux;
         }
         aux=aux->sig;
-    }
+    }   
+    *lista=NULL;
 }
 
 void concatenar(nodo **lista, nodo **grupos, nodo **gruposFin, int numGrupos){
     int i, anterior;
-    for(i=0;i>numGrupos;i++){
+    for(i=0;i<numGrupos;i++){
         if(grupos[i]!=NULL){
             if(*lista==NULL)
                 *lista = grupos[i];
@@ -55,6 +61,6 @@ void concatenar(nodo **lista, nodo **grupos, nodo **gruposFin, int numGrupos){
             anterior = i;
         }
     }
-    gruposFin[anterior]=NULL;
+    gruposFin[anterior]->sig=NULL;
 
 }
