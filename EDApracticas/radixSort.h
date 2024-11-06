@@ -13,7 +13,7 @@ extern long int contadorExterno,contadorInterno;
 
 void radixSort(nodo **lista,int numGrupos,int numCifras);
 void distribuir(int numCifra, nodo **lista, nodo** grupos,nodo **gruposFin);
-void concatenar(nodo **lista, nodo** grupos,nodo **gruposFin);
+void concatenar(nodo **lista, nodo** grupos,nodo **gruposFin, numGrupos);
 #endif // 
 
 
